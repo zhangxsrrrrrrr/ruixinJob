@@ -1,0 +1,36 @@
+remove:
+  bean: y
+elastic:
+  job:
+    zk:
+      server-lists: 127.0.0.1:2181
+      namespace: demo
+spring:
+  datasource:
+    dynamic:
+      druid:
+        initial-size: 5
+        min-idle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,slf4j
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://121.40.237.86:3306/test
+          username: root
+          password: root
+        slave_1:
+          url: jdbc:mysql://121.40.237.86:3306/db1
+          username: root
+          password: root
